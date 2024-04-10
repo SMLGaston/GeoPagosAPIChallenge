@@ -22,7 +22,7 @@ Esquema ejemplo:
     "Estado" : 1
 }
 
-los decimales del monto pueden escribirse tanto en coma, como punto.
+los decimales del monto deben escribirse con punto (ej 100.34) y no en coma.
 
 2)
 GET http://localhost:5002/api/Autorizaciones/Reporte 
