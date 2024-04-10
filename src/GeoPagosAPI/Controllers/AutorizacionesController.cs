@@ -61,13 +61,13 @@ namespace GeoPagosAPI.Controllers
         {
             if (Validacion(autorizacionDTO))
             {
-                return BadRequest();
+                return ValidationProblem("ClienteId, TipoCliente, TipoAutorizacion y Monto son obligatorios","",null,"Error de validación de datos");
             }
 
             try
             {
                 // Valido la Autorización por Servicio Externo
-                autorizacionDTO.Estado = Task.Run(() => GetProcesamiento(autorizacionDTO.Monto)).Result;
+                autorizacionDTO.Estado = Task.Run(() => GetProcesamiento(autorizacionDTO.Monto.Value)).Result;
 
                 // Guardado de la Autorización
                 Autorizacion autorizacion = Task.Run(() => Mapeo(autorizacionDTO)).Result;
@@ -116,10 +116,10 @@ namespace GeoPagosAPI.Controllers
             return new Autorizacion()
             {
                 Fecha = DateTime.Now,
-                ClienteId = autorizacionDTO.ClienteId,
-                TipoCliente = autorizacionDTO.TipoCliente,
-                TipoAutorizacion = autorizacionDTO.TipoAutorizacion,
-                Monto = autorizacionDTO.Monto,
+                ClienteId = autorizacionDTO.ClienteId.Value,
+                TipoCliente = autorizacionDTO.TipoCliente.Value,
+                TipoAutorizacion = autorizacionDTO.TipoAutorizacion.Value,
+                Monto = autorizacionDTO.Monto.Value,
                 Estado = autorizacionDTO.Estado.Value
             };
         }
@@ -145,7 +145,7 @@ namespace GeoPagosAPI.Controllers
             };
         }
 
-        public async Task<EstadoAutorizacion> GetProcesamiento(decimal monto)
+        private async Task<EstadoAutorizacion> GetProcesamiento(decimal monto)
         {
             HttpClient cliente = _factory.CreateClient();
             string path = _configuracion.GetValue<string>("Configuracion:ProcesadorUrl");
