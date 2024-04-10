@@ -18,7 +18,7 @@ app.MapGet("/Procesador/{monto}", (string monto) =>
 {
     try
     {
-        decimal numero = Convert.ToDecimal(monto.Replace(",", "."));
+        decimal numero = Convert.ToDecimal(monto);
         return (Math.Abs(numero % 1) == 0);
     }
     catch
