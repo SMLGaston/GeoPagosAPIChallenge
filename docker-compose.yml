@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  geopagosapi:
+    image: ${DOCKER_REGISTRY-}geopagosapi
+    build:
+      context: src\GeoPagosAPI
+      dockerfile: Dockerfile
+    ports:
+        - "5002:8080"
+        - "5003:8081"       
+
+
+  procesamientoservicio:
+    image: ${DOCKER_REGISTRY-}procesamientoservicio
+    build:
+      context: .
+      dockerfile: srv\ProcesamientoServicio\Dockerfile
+    ports:
+        - "5004:8080"
+        - "5005:8081"  
+

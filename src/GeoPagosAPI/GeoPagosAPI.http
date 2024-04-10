@@ -1,0 +1,6 @@
+@GeoPagosAPI_HostAddress = http://localhost:5278
+
+GET {{GeoPagosAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

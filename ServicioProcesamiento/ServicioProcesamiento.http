@@ -1,0 +1,6 @@
+@ServicioProcesamiento_HostAddress = http://localhost:5171
+
+GET {{ServicioProcesamiento_HostAddress}}/Procesador/
+Accept: application/json
+
+###
