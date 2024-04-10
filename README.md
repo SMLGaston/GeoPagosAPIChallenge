@@ -2,6 +2,8 @@ Challenge Payments GeoPagos
 
 Para ejecutar este proyecto,realizado en .NET 8, es necesario utilizar Visual Studio 2022, Y Docker Desktop.
 
+El archivo de apertura es GeoPagosAPI.sln
+
 Para utilizar los endpoints se recomienda Postman.
 
 Endpoints:
